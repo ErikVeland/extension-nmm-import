@@ -12,13 +12,13 @@ import { IModEntry, ModsMap, ProgressCB } from '../types/nmmEntries';
 // Doesn't seem to be used any longer, but going to keep it here just in case we need it one day.
 const _LINKS = {
   // tslint:disable-next-line: max-line-length
-    TO_CONSIDER: 'https://wiki.nexusmods.com/index.php/Importing_from_Nexus_Mod_Manager:_Things_to_consider',
+  TO_CONSIDER: 'https://wiki.nexusmods.com/index.php/Importing_from_Nexus_Mod_Manager:_Things_to_consider',
   // tslint:disable-next-line: max-line-length
-    UNMANAGED: 'https://wiki.nexusmods.com/index.php/Importing_from_Nexus_Mod_Manager:_Things_to_consider#Unmanaged_Files',
+  UNMANAGED: 'https://wiki.nexusmods.com/index.php/Importing_from_Nexus_Mod_Manager:_Things_to_consider#Unmanaged_Files',
   // tslint:disable-next-line: max-line-length
-    FILE_CONFLICTS: 'https://wiki.nexusmods.com/index.php/File_Conflicts:_Nexus_Mod_Manager_vs_Vortex',
-    MANAGE_CONFLICTS: 'https://wiki.nexusmods.com/index.php/Managing_File_Conflicts',
-    DOCUMENTATION: 'https://wiki.nexusmods.com/index.php/Category:Vortex',
+  FILE_CONFLICTS: 'https://wiki.nexusmods.com/index.php/File_Conflicts:_Nexus_Mod_Manager_vs_Vortex',
+  MANAGE_CONFLICTS: 'https://wiki.nexusmods.com/index.php/Managing_File_Conflicts',
+  DOCUMENTATION: 'https://wiki.nexusmods.com/index.php/Category:Vortex',
 };
   
 
@@ -149,8 +149,8 @@ export async function getArchives(source: string, parsedMods: { [id: string]: IM
 }
 
 export function createModEntry(sourcePath: string,
-  input: string,
-  existingDownloads: Set<string>): Promise<IModEntry> {
+                               input: string,
+                               existingDownloads: Set<string>): Promise<IModEntry> {
   // Attempt to query cache/meta information from NMM and return a mod entry
   //  to use in the import process.
   const getInner = (ele: Element): string => {
@@ -176,7 +176,7 @@ export function createModEntry(sourcePath: string,
       .then(data => {
         const fields = data.toString().split('@@');
         return fs.readFileAsync(path.join(cacheBasePath,
-          (fields[1] === '-') ? '' : fields[1], 'fomod', 'info.xml'));
+                                          (fields[1] === '-') ? '' : fields[1], 'fomod', 'info.xml'));
       })
       .then(infoXmlData => {
         const parser = new DOMParser();

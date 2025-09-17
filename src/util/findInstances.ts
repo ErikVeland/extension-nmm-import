@@ -27,14 +27,14 @@ function getVirtualFolder(userConfig: string, gameId: string): Promise<string[]>
   let nmmLinkPath = '';
 
   item = xmlDoc
-  .querySelector(`setting[name="HDLinkFolder"] item[modeId="${convertGameId(gameId)}" i] string`);
+    .querySelector(`setting[name="HDLinkFolder"] item[modeId="${convertGameId(gameId)}" i] string`);
 
   if (item !== null) {
     nmmLinkPath = item.textContent;
   }
 
   item = xmlDoc
-  .querySelector(`setting[name="ModFolder"] item[modeId="${convertGameId(gameId)}" i] string`);
+    .querySelector(`setting[name="ModFolder"] item[modeId="${convertGameId(gameId)}" i] string`);
 
   if (item === null) {
     return Promise.resolve(undefined);
@@ -56,7 +56,7 @@ function findInstances(gameId: string): Promise<string[][]> {
   const base = path.resolve(util.getVortexPath('appData'), '..', 'local', 'Black_Tree_Gaming');
   return fs.readdirAsync(base)
     .filter((fileName: string) => fs.statAsync(path.join(base, fileName))
-                                      .then(stat => stat.isDirectory()))
+      .then(stat => stat.isDirectory()))
     .then((instances: string[]) =>
       Promise.map(instances, instance => fs.readdirAsync(path.join(base, instance))
         .then((versions: string[]) =>

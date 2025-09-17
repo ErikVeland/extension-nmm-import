@@ -18,12 +18,12 @@ function getModInfoList(xmlData: string): Promise<HTMLCollectionOf<Element>> {
     // sanity checks for the file structure
     if ((version === null) || (version === undefined)) {
       return reject(new ParseError(
-          'The selected folder does not contain a valid VirtualModConfig.xml file.'));
+        'The selected folder does not contain a valid VirtualModConfig.xml file.'));
     }
 
     if (version.getAttribute('fileVersion') !== '0.3.0.0') {
       return reject(new ParseError(
-          'The selected folder contains an older VirtualModConfig.xml file,' +
+        'The selected folder contains an older VirtualModConfig.xml file,' +
           'you need to upgrade your NMM before proceeding with the mod import.'));
     }
 

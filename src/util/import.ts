@@ -30,7 +30,7 @@ function enhance(sourcePath: string, input: IModEntry,
     .then(data => {
       const fields = data.toString().split('@@');
       return fs.readFileAsync(path.join(cacheBasePath,
-        (fields[1] === '-') ? '' : fields[1], 'fomod', 'info.xml'));
+                                        (fields[1] === '-') ? '' : fields[1], 'fomod', 'info.xml'));
     })
     .then(infoXmlData => {
       const parser = new DOMParser();
@@ -79,7 +79,7 @@ function importArchives(api: types.IExtensionApi,
     if (vortexCategories['nmm_0'] === undefined) {
       trace.log('info', 'Adding root for imported NMM categories');
       store.dispatch(actions.setCategory(gameId, 'nmm_0',
-        { name: 'Imported from NMM', order: 0, parentCategory: undefined }));
+                                         { name: 'Imported from NMM', order: 0, parentCategory: undefined }));
     }
 
     let id = 1;
@@ -89,7 +89,7 @@ function importArchives(api: types.IExtensionApi,
 
     trace.log('info', 'NMM category couldn\'t be matched, importing', name);
     store.dispatch(actions.setCategory(gameId, `nmm_${id}`,
-      { name, order: 0, parentCategory: 'nmm_0' }));
+                                       { name, order: 0, parentCategory: 'nmm_0' }));
     return `nmm_${id}`;
   };
 
@@ -116,11 +116,11 @@ function importArchives(api: types.IExtensionApi,
       });
       return Promise.resolve();
     })
-    .then(() => {
-      store.dispatch(actions.addLocalDownload(
-        mod.archiveId, gameId, mod.modFilename, size));
-      return Promise.resolve();
-    });
+      .then(() => {
+        store.dispatch(actions.addLocalDownload(
+          mod.archiveId, gameId, mod.modFilename, size));
+        return Promise.resolve();
+      });
   };
 
   return trace.writeFile('parsedMods.json', JSON.stringify(mods))
@@ -137,18 +137,18 @@ function importArchives(api: types.IExtensionApi,
             .then(stats => transferArchiveFile(archivePath, downloadPath, mod, stats.size))
             .tap(() => importedArchives.push(mod))
             .catch(err => {
-                trace.log('error', 'Failed to import mod archive',
-                          archivePath + ' - ' + err.message);
-                errors.push(mod.modFilename);
+              trace.log('error', 'Failed to import mod archive',
+                        archivePath + ' - ' + err.message);
+              errors.push(mod.modFilename);
             });
         })
-        .then(() => {
-          trace.log('info', 'Finished transferring mod archives');
-          if (importedArchives.length > 0) {
-            addMetaData(gameId, importedArchives, api);
-            api.events.emit('did-import-downloads', importedArchives.map(arch => arch.archiveId));
-          }
-        }));
+          .then(() => {
+            trace.log('info', 'Finished transferring mod archives');
+            if (importedArchives.length > 0) {
+              addMetaData(gameId, importedArchives, api);
+              api.events.emit('did-import-downloads', importedArchives.map(arch => arch.archiveId));
+            }
+          }));
     })
     .then(() => {
       trace.finish();

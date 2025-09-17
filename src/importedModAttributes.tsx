@@ -75,7 +75,7 @@ export const LOCAL: types.ITableAttribute<IModEntry> = {
         tooltip={t('This archive is already managed by Vortex')}
         name='feedback-warning'
       />
-   ) : null;
+    ) : null;
   },
   calc: mod => mod.isAlreadyManaged,
   placement: 'table',

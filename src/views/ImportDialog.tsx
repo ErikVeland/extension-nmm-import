@@ -324,8 +324,8 @@ class ImportDialog extends ComponentEx<IProps, IComponentState> {
         this.nextState.modsToImport = mods;
         const modList = Object.keys(mods)
           .map(id => mods[id]);
-      return this.getModsCapacity(modList, progCB);
-    });
+        return this.getModsCapacity(modList, progCB);
+      });
   }
 
   private getModsCapacity(modList: IModEntry[], cb: ProgressCB): Promise<void> {
@@ -832,7 +832,7 @@ class ImportDialog extends ComponentEx<IProps, IComponentState> {
 
     // Store the initial value of the plugin sorting functionality (if it's even applicable)
     this.nextState.autoSortEnabled = util.getSafe(this.context.api.store.getState(),
-      ['settings', 'plugins', 'autosort'], false);
+                                                  ['settings', 'plugins', 'autosort'], false);
 
     try {
       const capInfo = getCapacityInformation(downloadPath);
@@ -892,7 +892,7 @@ class ImportDialog extends ComponentEx<IProps, IComponentState> {
         const errorMessage = (err.code === 'EPERM')
           ? t('"{{permFile}}" is access protected. Please ensure your account has '
             + 'full read/write permissions to your game\'s NMM mods folder and try again.',
-            { replace: { permFile: err.path } })
+              { replace: { permFile: err.path } })
           : err.message;
         this.nextState.error = errorMessage;
         return Promise.resolve({});
@@ -956,9 +956,9 @@ class ImportDialog extends ComponentEx<IProps, IComponentState> {
           this.context.api.events.emit('enable-download-watch', false);
 
           return importArchives(this.context.api, gameId, this.mTrace, modsPath, enabledMods,
-            categories, (mod: string, pos: number) => {
-              this.nextState.progress = { mod, pos };
-            })
+                                categories, (mod: string, pos: number) => {
+                                  this.nextState.progress = { mod, pos };
+                                })
             .then(errors => {
               this.context.api.events.emit('enable-download-watch', true);
               this.nextState.failedImports = errors;
