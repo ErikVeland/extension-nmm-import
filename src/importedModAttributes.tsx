@@ -1,6 +1,6 @@
 import { IModEntry } from './types/nmmEntries';
 
-import * as I18next from 'i18next';
+import type { TFunction } from 'i18next';
 import * as React from 'react';
 import { TableTextFilter, tooltip, types } from 'vortex-api';
 
@@ -68,7 +68,7 @@ export const LOCAL: types.ITableAttribute<IModEntry> = {
   name: 'Duplicate',
   description: 'Whether the mod/archive is already managed by Vortex',
   icon: 'level-up',
-  customRenderer: (mod: IModEntry, detail: boolean, t: I18next.TFunction) => {
+  customRenderer: (mod: IModEntry, detail: boolean, t: TFunction) => {
     return mod.isAlreadyManaged ? (
       <tooltip.Icon
         id={`import-duplicate-${mod.nexusId}`}
